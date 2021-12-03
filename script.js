@@ -1,3 +1,4 @@
+<script type="application/javascript">
 var canvas = document.getElementById('canvas');
 var ctx = canvas.getContext('2d');
 var raf;
@@ -62,3 +63,4 @@ canvas.addEventListener('mouseout', function(e) {
 });
 
 ball.draw();
+ </script>
