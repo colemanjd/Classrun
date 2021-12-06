@@ -14,17 +14,16 @@ var ctx = canvas.getContext('2d');
 var raf;
 var running = false;
 
-var TopLeftChair = {
-  x: 298.4375,
-  y: 160.5,
-  width: 87.5,
-  height: 77.5,
-  color: 'lime',
-  draw: function(){
-    ctx.fillStyle = this.color;
-    ctx.fill();
-  }
-};
+var BR = new Kinetic.Rect(  
+     {  
+      x: 50,  
+      y: 75,  
+      width: 100,  
+      height: 50,  
+      fill: "#ff66ff",  
+      stroke: "black",  
+      strokeWidth: 4  
+         }); 
   
 var ball = {
   x: 100,
