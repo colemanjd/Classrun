@@ -5,7 +5,7 @@
     <title>Basic Animation with Canvas example</title>
   </head>
 <body>
-        <canvas id="canvas" width="400" height="300">
+        <canvas id="canvas" width="955" height="1420">
          If you can see this, your browser does not support Canvas
         </canvas>
 <script>
@@ -14,6 +14,14 @@ var ctx = canvas.getContext('2d');
 var raf;
 var running = false;
 
+var TopLeftChair = {
+  x: 298.4375,
+  y: 160.5,
+  width: 87.5,
+  height: 77.5,
+  fill: "lime"
+};
+  
 var ball = {
   x: 100,
   y: 100,
