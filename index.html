@@ -19,7 +19,10 @@ var TopLeftChair = {
   y: 160.5,
   width: 87.5,
   height: 77.5,
-  fill: "lime"
+  color: 'lime',
+  draw: function(){
+    ctx.fillStyle = this.color;
+  }
 };
   
 var ball = {
