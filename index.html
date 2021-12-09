@@ -1,54 +1,165 @@
-<!doctype html>
 <html>
-  <head>
-    <meta charset="UTF-8" />
-    <title>Evac</title>
-  </head>
-<body>
-        <canvas id="canvas" width="955" height="1420">
-         If you can see this, your browser does not support Canvas
-        </canvas>
-<script>
-var canvas = document.getElementById('canvas');
-var ctx = canvas.getContext('2d');
-var raf;
-var selected = false;
-  
+ <head>
+  <title>Mills 302 B</title>
+  <meta charset="utf-8"/>
+  <script type="application/javascript">
 
-  
-var TLC = {
-  x: 298.4375,
-  y: 160.5,
-  radius: 87.5,
-  color: 'lime',
-  draw: function() {
-    ctx.beginPath();
-    ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, true);
-    ctx.closePath();
-    ctx.fillStyle = this.color;
-    ctx.fill();
+  empty_color='rgb(43, 255, 0)';
+  selected_color='rgb(0, 204, 68)';
+  submitted_color='rgb(76, 166, 255)';
+  occupied_color='rgb(25, 25, 25)';
+
+  chairs = [{
+    state:"empty",
+    x:361.66,
+    y:898.5,
+  },{
+    state:"empty",
+    x:520.82,
+    y:898.5,
+  },{
+    state:"empty",
+    x:149.25,
+    y:327.75,
+  },{
+    state:"empty",
+    x:149.25,
+    y:459.25,
+  },{
+    state:"empty",
+    x:149.25,
+    y:590.75,
+  },{
+    state:"empty",
+    x:149.25,
+    y:722.25,
+  },{
+    state:"empty",
+    x:361.66,
+    y:898.5,
+  },{
+    state:"empty",
+    x:718.25,
+    y:327.75,
+  },{
+    state:"empty",
+    x:718.25,
+    y:459.25,
+  },{
+    state:"empty",
+    x:718.25,
+    y:590.75,
+  },{
+    state:"empty",
+    x:718.25,
+    y:722.25,
+  },{
+    state:"empty",
+    x:298.4375,
+    y:160.5,
+  },{
+    state:"empty",
+    x:438.75,
+    y:160.5,
+  },{
+    state:"empty",
+    x:579.0625,
+    y:160.5,
   }
-};
-
-function clear() {
-  ctx.fillStyle = 'rgba(255, 255, 255, 0.3)';
-  ctx.fillRect(0,0,canvas.width,canvas.height);
-}
+]
 
 
 
-canvas.addEventListener('click', function(e) {
-  if (!selected) {
-    raf = window.requestAnimationFrame(draw);
-    selected = true;
-    ctx.fillStyle = 'red';
-  }
-});
+    function draw() {
+      var canvas = document.getElementById('canvas');
+      if (canvas.getContext) {
+        var ctx = canvas.getContext('2d');
 
 
 
-TLC.draw();
+       <!--Blackboard-->
+       ctx.fillStyle = 'rgb(92, 58, 13)';
+        ctx.fillRect(0, 240, 10, 940);
 
-</script>
-</body>
+
+       <!--Door-->
+       ctx.fillStyle = 'rgb(207, 130, 29)';
+        ctx.fillRect(723.75, 0, 200, 20);
+
+
+
+       <!--Tables-->
+       ctx.fillStyle = 'rgb(0, 0, 0)';
+        ctx.fillRect(238.75, 240, 477.5, 217.5);
+
+       ctx.fillStyle = 'rgb(0, 0, 0)';
+        ctx.fillRect(238.75, 459.5, 477.5, 217.5);
+
+       ctx.fillStyle = 'rgb(0, 0, 0)';
+        ctx.fillRect(238.75, 679, 477.5, 217.5);
+
+
+
+
+
+
+       for(i=0; i<14; i++){
+         if(chairs[i].state=='empty'){
+           ctx.fillStyle = empty_color;
+         }
+         if(chairs[i].state=='selected'){
+           ctx.fillStyle = selected_color;
+         }
+         if(chairs[i].state=='submitted'){
+           ctx.fillStyle = submitted_color;
+         }
+         if(chairs[i].state=='occupied'){
+           ctx.fillStyle = occupied_color;
+         }
+         ctx.fillRect(chairs[i].x, chairs[i].y, 87.5, 77.5);
+       }
+
+
+
+
+
+
+
+
+       canvas.addEventListener('click', function(e) {
+               for(i=0; i<14; i++){
+                 if(e.clientX>=chairs[i].x&&e.clientX<=(chairs[i].x+87.5)&&e.clientY>=chairs[i].y&&e.clientY<=(chairs[i].y+77.5)&&chairs[i].state=='selected'){
+                   chairs[i].state='empty';
+                   ctx.fillStyle = empty_color;
+                 } if(e.clientX>=chairs[i].x&&e.clientX<=(chairs[i].x+87.5)&&e.clientY>=chairs[i].y&&e.clientY<=(chairs[i].y+77.5)&&chairs[i].state=='empty'){
+                   for(c=0; c<14; c++){
+                     if(chairs[c].state=='selected'){
+                       chairs[c].state='empty';
+                       ctx.fillStyle = empty_color;
+                     }
+                   chairs[i].state='selected';
+                   ctx.fillStyle = selected_color;
+                 }
+               }
+             }
+
+              draw();
+              });
+
+
+
+
+
+
+
+
+
+      }
+    }
+  </script>
+ </head>
+ <body onload="draw();">
+   <canvas id="canvas" style="border: 1px solid" width="955" height="1420"></canvas>
+   <p> <input id="finalbutton" type="button" value="Submit Seat"></input> </p>
+ </body>
 </html>
